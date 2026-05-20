@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>受保护页面</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
+      overflow:hidden;
+    }
+
+    .container{
+      width:360px;
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:20px;
+      padding:35px;
+      color:white;
+      text-align:center;
+      box-shadow:0 10px 40px rgba(0,0,0,0.4);
+    }
+
+    h1{
+      font-size:28px;
+      margin-bottom:12px;
+    }
+
+    p{
+      color:#cbd5e1;
+      margin-bottom:25px;
+      font-size:14px;
+    }
+
+    input{
+      width:100%;
+      padding:14px;
+      border:none;
+      border-radius:12px;
+      outline:none;
+      font-size:16px;
+      margin-bottom:15px;
+      background:rgba(255,255,255,0.12);
+      color:white;
+    }
+
+    input::placeholder{
+      color:#cbd5e1;
+    }
+
+    button{
+      width:100%;
+      padding:14px;
+      border:none;
+      border-radius:12px;
+      background:#3b82f6;
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    button:hover{
+      background:#2563eb;
+      transform:translateY(-2px);
+    }
+
+    .error{
+      margin-top:12px;
+      color:#f87171;
+      font-size:14px;
+      display:none;
+    }
+
+    .secret-page{
+      display:none;
+      text-align:center;
+      color:white;
+    }
+
+    .secret-page h2{
+      font-size:42px;
+      margin-bottom:15px;
+    }
+
+    .secret-page p{
+      font-size:18px;
+      color:#e2e8f0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 登录框 -->
+  <div class="container" id="loginBox">
+    <h1>访问验证</h1>
+    <p>请输入密码进入页面</p>
+
+    <input type="password" id="password" placeholder="输入密码">
+
+    <button onclick="checkPassword()">进入页面</button>
+
+    <div class="error" id="errorText">
+      错误代码：16点49分35.4秒N
+    </div>
+  </div>
+
+  <!-- 进入后的内容 -->
+  <div class="secret-page" id="secretPage">
+    <h2>欢迎进入 🔐</h2>
+    <p>98°32'15.7 "E</p>
+
+  </div>
+
+  <script>
+    // 这里修改你的密码
+    const correctPassword = "RCSSB";
+
+    function checkPassword() {
+      const input = document.getElementById("password").value;
+      const errorText = document.getElementById("errorText");
+
+      if(input === correctPassword){
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("secretPage").style.display = "block";
+      } else {
+        errorText.style.display = "block";
+      }
+    }
+
+    // 回车登录
+    document.getElementById("password").addEventListener("keypress", function(e){
+      if(e.key === "Enter"){
+        checkPassword();
+      }
+    });
+  </script>
+
+</body>
+</html>
